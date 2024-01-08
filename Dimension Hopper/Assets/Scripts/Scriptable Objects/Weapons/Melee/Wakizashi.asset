@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Wakizashi
   damage: 30
-  attackFrequency: 1
+  attackFrequency: 4
   weaponrange: 1

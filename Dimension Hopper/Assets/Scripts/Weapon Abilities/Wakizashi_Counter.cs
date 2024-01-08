@@ -8,6 +8,7 @@ public class Wakizashi_Counter : MonoBehaviour
     public double baseCooldown;
     public double currentAbilityDuration;
     public double baseAbilityDuration;
+    public bool successfulCounter;
     public bool abilityUsed;
     public double cooldownReduction;
     //initialise a timer object
@@ -23,34 +24,49 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         if (abilityUsed)
         {
-            currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
+            if (successfulCounter)
+            {
+                SuccessfulCounter();
+            }
+            else if(currentAbilityDuration<=0)
+            {
+                abilityEnd();
+            }
+            else
+            {
+                currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
+            }
         }
         else if(currentCooldown>0)
         {
             currentCooldown = currentCooldown - Time.deltaTime;
         }
     }
-    void TriggerAbility()
+    bool TriggerAbility()
     {
         if (currentCooldown <= 0)
         {
             currentAbilityDuration = baseAbilityDuration;
+            successfulCounter = false;
+            abilityUsed = true;
+            return true;
         }
         else
         {
-            // return some sort of error
+            return false;
         }
     }
-    
+    void attacked()
+    {
+        if (abilityUsed==true)
+        {
+            successfulCounter = true;
+        }
+    }
     void SuccessfulCounter()
     {
         currentCooldown = baseCooldown - cooldownReduction;
         abilityUsed = false;
-    }
-
-    double getCurrentDuration()
-    {
-        return currentAbilityDuration;
     }
     void abilityEnd()
     {
