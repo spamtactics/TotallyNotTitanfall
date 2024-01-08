@@ -6,29 +6,24 @@ public class PlayerAttributes : MonoBehaviour
 {
     public double health;
     public double speed;
-    public bool immunity;
-    void Start()
-    {
-        immunity = false;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        //insert script to 
+        //might just delete this
     }
-
-    void dimensionChangeSpeed(health)
+    public void dimensionChangeSpeed(double health)
     {
         this.health = health;
     }
-    void dimensionChangeDurability(speed)
+    public void dimensionChangeDurability(double health, double speed)
     {
         this.speed = speed;
+        this.health = health;
     }
 
-    bool getImmunity()
+    public void changeHealth(double deltaHealth)
     {
-        return immunity;
+        health = health - deltaHealth;
     }
 }
