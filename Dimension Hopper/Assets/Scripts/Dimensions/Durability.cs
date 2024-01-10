@@ -9,7 +9,7 @@ public class Durability : MonoBehaviour
     public double newSpeed;
 
     public Shield_Guard guardAbility;
-
+    public bool immune;
     public bool valid;
     // Start is called before the first frame update
     void Start()
@@ -29,11 +29,21 @@ public class Durability : MonoBehaviour
             valid = guardAbility.TriggerAbility();
             if (valid)
             {
+                immune = true;
                 //print successful ability
             }
             else
             {
                 //print failed ability
+            }
+        }
+
+        if (immune)
+        {
+            if (guardAbility.checkImmunity()==false)
+            {
+                immune = false;
+                //print ability ended
             }
         }
     }

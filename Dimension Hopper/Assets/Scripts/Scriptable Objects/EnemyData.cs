@@ -10,5 +10,5 @@ public class EnemyData : ScriptableObject {
     public double spawnRate;
     public double hpRefund;
     public double attackWindup;
-    public double attackRAnge;
+    public double attackRange;
 }
