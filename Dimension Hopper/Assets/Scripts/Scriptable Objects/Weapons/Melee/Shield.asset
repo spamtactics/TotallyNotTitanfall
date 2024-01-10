@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   weaponName: Shield
-  damage: 20
-  attackFrequency: 2
-  weaponrange: 1
+  damage: 5
+  attackFrequency: 1
+  weaponrange: 5
