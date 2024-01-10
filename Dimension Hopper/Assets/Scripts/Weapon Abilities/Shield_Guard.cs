@@ -15,7 +15,6 @@ public class Shield_Guard : MonoBehaviour
         currentCooldown = 0.0;
         abilityUsed = false;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -32,8 +31,7 @@ public class Shield_Guard : MonoBehaviour
             currentCooldown = currentCooldown - Time.deltaTime;
         }
     }
-
-    bool TriggerAbility()
+    public bool TriggerAbility()
     {
         if (currentCooldown<=0)
         {
@@ -45,6 +43,11 @@ public class Shield_Guard : MonoBehaviour
         {
             return false;
         }
+    }
+
+    bool checkImmunity()
+    {
+        return abilityUsed;
     }
     void AbilityEnd()
     {
