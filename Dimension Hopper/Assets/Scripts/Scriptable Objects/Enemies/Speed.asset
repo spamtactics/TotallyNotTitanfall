@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Speed
   m_EditorClassIdentifier: 
   enemyName: Rectangle
-  damage: 0
-  speed: 0
-  spawnRate: 0
-  hpRefund: 0
-  attackWindup: 0
-  attackRAnge: 0
+  damage: 20
+  speed: 1.5
+  spawnRate: 5
+  hpRefund: 2
+  attackWindup: 0.5
+  attackRange: 10
