@@ -5,7 +5,7 @@ using UnityEngine;
 public class Speed : MonoBehaviour
 {
     public double newHealth;
-    //Attack speed increase is hard coded onto the unique weapon
+    // Attack speed increase is hard coded onto the unique weapon
     // Start is called before the first frame update
     void Start()
     {

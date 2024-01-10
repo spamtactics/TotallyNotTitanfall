@@ -56,11 +56,16 @@ public class Wakizashi_Counter : MonoBehaviour
             return false;
         }
     }
-    void attacked()
+    bool attacked()
     {
         if (abilityUsed==true)
         {
             successfulCounter = true;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     void SuccessfulCounter()

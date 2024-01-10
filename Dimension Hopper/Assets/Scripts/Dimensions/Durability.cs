@@ -7,11 +7,14 @@ public class Durability : MonoBehaviour
     public double newHealth;
 
     public double newSpeed;
-    //Attack speed increase is hard coded onto the unique weapon
+
+    public Shield_Guard guardAbility;
+
+    public bool valid;
     // Start is called before the first frame update
     void Start()
     {
-        //might just delete this
+        guardAbility = new Shield_Guard();
     }
     void enterDimension(PlayerAttributes player)
     {
@@ -20,6 +23,18 @@ public class Durability : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //not sure what to put here
+        //check if attacked
+        if (Input.GetKey(KeyCode.F))
+        {
+            valid = guardAbility.TriggerAbility();
+            if (valid)
+            {
+                //print successful ability
+            }
+            else
+            {
+                //print failed ability
+            }
+        }
     }
 }
