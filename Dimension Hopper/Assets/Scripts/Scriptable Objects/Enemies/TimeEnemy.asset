@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7beae25a3ea83ef4d890a5f4ac677c86, type: 3}
-  m_Name: Speed
+  m_Name: TimeEnemy
   m_EditorClassIdentifier: 
-  enemyName: Rectangle
-  damage: 0
-  speed: 0
-  spawnRate: 0
-  hpRefund: 0
-  attackWindup: 0
-  attackRAnge: 0
+  enemyName: Sphere
+  damage: 10
+  speed: 3
+  spawnRate: 4
+  hpRefund: 2
+  attackWindup: 0.5
+  attackRange: 10

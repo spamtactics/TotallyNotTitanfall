@@ -69,4 +69,9 @@ public class DimensionSwap : MonoBehaviour
             return false;
         }
     }
+
+    public bool checkSwapping()
+    {
+        return isSwapping;
+    }
 }

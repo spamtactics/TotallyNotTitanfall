@@ -24,11 +24,7 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         if (abilityUsed)
         {
-            if (successfulCounter)
-            {
-                SuccessfulCounter();
-            }
-            else if(currentAbilityDuration<=0)
+            if(currentAbilityDuration<=0)
             {
                 abilityEnd();
             }
@@ -42,7 +38,7 @@ public class Wakizashi_Counter : MonoBehaviour
             currentCooldown = currentCooldown - Time.deltaTime;
         }
     }
-    bool TriggerAbility()
+    public bool TriggerAbility()
     {
         if (currentCooldown <= 0)
         {
@@ -56,11 +52,12 @@ public class Wakizashi_Counter : MonoBehaviour
             return false;
         }
     }
-    bool attacked()
+    public bool counter()
     {
         if (abilityUsed==true)
         {
             successfulCounter = true;
+            SuccessfulCounter();
             return true;
         }
         else
@@ -77,5 +74,10 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         abilityUsed = false;
         currentCooldown = baseCooldown;
+    }
+
+    public double getCooldown()
+    {
+        return currentCooldown;
     }
 }

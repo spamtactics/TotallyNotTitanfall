@@ -45,7 +45,7 @@ public class Shield_Guard : MonoBehaviour
         }
     }
 
-    bool checkImmunity()
+    public bool checkImmunity()
     {
         return abilityUsed;
     }
@@ -53,5 +53,10 @@ public class Shield_Guard : MonoBehaviour
     {
         abilityUsed = false;
         currentCooldown = baseCooldown;
+    }
+
+    public double getCooldown()
+    {
+        return currentCooldown;
     }
 }

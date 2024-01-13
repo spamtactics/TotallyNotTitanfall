@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7beae25a3ea83ef4d890a5f4ac677c86, type: 3}
-  m_Name: Time
+  m_Name: DurabilityEnemy
   m_EditorClassIdentifier: 
-  enemyName: 
-  damage: 0
-  speed: 0
-  spawnRate: 0
-  hpRefund: 0
-  attackWindup: 0
-  attackRAnge: 0
+  enemyName: Triangle
+  damage: 50
+  speed: 1
+  spawnRate: 5
+  hpRefund: 10
+  attackWindup: 0.75
+  attackRange: 10
