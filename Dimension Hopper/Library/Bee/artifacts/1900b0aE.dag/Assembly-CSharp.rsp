@@ -358,8 +358,10 @@
 "Assets/Scripts/Dimensions/DimensionSwap.cs"
 "Assets/Scripts/Dimensions/Durability.cs"
 "Assets/Scripts/Dimensions/Speed.cs"
+"Assets/Scripts/Dimensions/Time.cs"
 "Assets/Scripts/Scriptable Objects/EnemyData.cs"
 "Assets/Scripts/Scriptable Objects/WeaponData.cs"
+"Assets/Scripts/Weapon Abilities/Adrenaline Rush.cs"
 "Assets/Scripts/Weapon Abilities/Shield_Guard.cs"
 "Assets/Scripts/Weapon Abilities/Wakizashi_Counter.cs"
 -langversion:9.0

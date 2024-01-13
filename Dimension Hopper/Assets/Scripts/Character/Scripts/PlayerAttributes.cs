@@ -26,4 +26,23 @@ public class PlayerAttributes : MonoBehaviour
     {
         health = health - deltaHealth;
     }
+
+    public void adrenalineRush()
+    {
+        speed = speed * 2;
+    }
+
+    public void endAdrenalineRush()
+    {
+        speed = speed / 2;
+    }
+
+    public bool getAlive()
+    {
+        if (health < 0)
+        {
+            return false;
+        }
+        return true;
+    }
 }

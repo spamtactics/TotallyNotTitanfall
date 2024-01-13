@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f72466c9f1370794b9dc26a3963d2b72
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Sphere: {fileID: 11400000, guid: f8de582c470b29c42b9258c7645cc629, type: 2}
+  - sphere: {instanceID: 0}
+  - AdrenalineAbility: {instanceID: 0}
+  - player: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

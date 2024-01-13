@@ -10,8 +10,9 @@ public class Speed : MonoBehaviour
     public GameObject rectangle;
     public double newHealth;
     public Wakizashi_Counter counter;
-	public bool immune=false;
     public double cooldown;
+
+    public PlayerAttributes player;
     // Attack speed increase is hard coded onto the unique weapon
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,10 @@ public class Speed : MonoBehaviour
         rectangle = new GameObject();
         rectangle.AddComponent(typeof(EnemyData));
     }
-    void enterDimension(PlayerAttributes player)
+    public void enterDimension(PlayerAttributes player)
     {
-        player.dimensionChangeSpeed(newHealth);
+        this.player = player;
+        this.player.dimensionChangeSpeed(newHealth);
     }
     // Update is called once per frame
     void Update()
@@ -31,7 +33,6 @@ public class Speed : MonoBehaviour
         {
             if (counter.TriggerAbility())
             {
-                immune = true;
                 //print successful ability
             }
             else
@@ -40,10 +41,21 @@ public class Speed : MonoBehaviour
                 //print cooldown
             }
         }
-        
+        if (timeToSpawn > 0.0)
+        {
+            timeToSpawn -= Time.deltaTime;
+        }
+        else
+        {
+            spawnNew();
+            timeToSpawn = spawnRate;
+        }
     }
-
-    void isAttacked(PlayerAttributes player, double damage)
+    void spawnNew()
+    {
+        Instantiate(rectangle);
+    }
+    void isAttacked(double damage)
     {
         if (counter.counter())
         {
@@ -52,6 +64,17 @@ public class Speed : MonoBehaviour
         else
         {
             player.changeHealth(damage);
+            if (player.getAlive() == false)
+            {
+                exitDimension();
+                //end the game
+            }
         }
+    }
+
+    public PlayerAttributes exitDimension()
+    {
+        //end the instance of Wakizashi Counter
+        return player;
     }
 }

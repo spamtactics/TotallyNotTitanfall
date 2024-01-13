@@ -17,6 +17,8 @@ public class Durability : MonoBehaviour
     public bool immune;
 
     public double cooldown;
+
+    public PlayerAttributes player;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +29,10 @@ public class Durability : MonoBehaviour
         triangle = new GameObject();
         triangle.AddComponent(typeof(EnemyData));
     }
-    void enterDimension(PlayerAttributes player)
+    public void enterDimension(PlayerAttributes player)
     {
-        player.dimensionChangeDurability(newHealth, newSpeed);
+        this.player = player;
+        this.player.dimensionChangeDurability(newHealth, newSpeed);
     }
     // Update is called once per frame
     void Update()
@@ -68,16 +71,26 @@ public class Durability : MonoBehaviour
         }
     }
 
-    void isAttacked(double damage, PlayerAttributes player)
+    void isAttacked(double damage)
     {
         //called if the beenAttacked Event is raised
         if (immune==false)
         {
             player.changeHealth(damage);
+            if (player.getAlive() == false)
+            {
+                //end the game
+                exitDimension();
+            }
         }
     }
     void spawnNew()
     {
         Instantiate(triangle);
+    }
+    public PlayerAttributes exitDimension()
+    {
+        //end the instance of Shield_Guard
+        return player;
     }
 }

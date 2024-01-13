@@ -24,11 +24,7 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         if (abilityUsed)
         {
-            if (successfulCounter)
-            {
-                SuccessfulCounter();
-            }
-            else if(currentAbilityDuration<=0)
+            if(currentAbilityDuration<=0)
             {
                 abilityEnd();
             }
@@ -61,6 +57,7 @@ public class Wakizashi_Counter : MonoBehaviour
         if (abilityUsed==true)
         {
             successfulCounter = true;
+            SuccessfulCounter();
             return true;
         }
         else
