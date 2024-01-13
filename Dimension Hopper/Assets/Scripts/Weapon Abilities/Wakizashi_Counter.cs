@@ -42,7 +42,7 @@ public class Wakizashi_Counter : MonoBehaviour
             currentCooldown = currentCooldown - Time.deltaTime;
         }
     }
-    bool TriggerAbility()
+    public bool TriggerAbility()
     {
         if (currentCooldown <= 0)
         {
@@ -56,7 +56,7 @@ public class Wakizashi_Counter : MonoBehaviour
             return false;
         }
     }
-    bool attacked()
+    public bool counter()
     {
         if (abilityUsed==true)
         {
@@ -77,5 +77,10 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         abilityUsed = false;
         currentCooldown = baseCooldown;
+    }
+
+    public double getCooldown()
+    {
+        return currentCooldown;
     }
 }

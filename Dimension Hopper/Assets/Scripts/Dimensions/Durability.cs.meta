@@ -3,7 +3,11 @@ guid: da43c165a2954be46b8f56263664a2f6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Triangle: {fileID: 11400000, guid: ce7f48730e4a13a459304894558739d4, type: 2}
+  - triangle: {instanceID: 0}
+  - durable: {instanceID: 0}
+  - guardAbility: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
