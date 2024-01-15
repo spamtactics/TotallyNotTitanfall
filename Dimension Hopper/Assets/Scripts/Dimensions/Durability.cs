@@ -71,7 +71,7 @@ public class Durability : MonoBehaviour
         }
     }
 
-    void isAttacked(double damage)
+    public void isAttacked(double damage)
     {
         //called if the beenAttacked Event is raised
         if (immune==false)

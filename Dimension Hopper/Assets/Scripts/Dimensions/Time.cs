@@ -66,7 +66,7 @@ public class TimeDimension : MonoBehaviour
             timeToSpawn = spawnRate;
         }
     }
-    void isAttacked(double damage)
+    public void isAttacked(double damage)
     {
         //called if the beenAttacked Event is raised
         player.changeHealth(damage);

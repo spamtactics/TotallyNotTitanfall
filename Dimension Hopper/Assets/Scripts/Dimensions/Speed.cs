@@ -55,7 +55,7 @@ public class Speed : MonoBehaviour
     {
         Instantiate(rectangle);
     }
-    void isAttacked(double damage)
+    public void isAttacked(double damage)
     {
         if (counter.counter())
         {
