@@ -379,6 +379,7 @@
 "Assets/Scripts/Dimensions/DimensionSwap.cs"
 "Assets/Scripts/Dimensions/Durability.cs"
 "Assets/Scripts/Dimensions/ProcGen/Generation.cs"
+"Assets/Scripts/Dimensions/ProcGen/TileGeneration.cs"
 "Assets/Scripts/Dimensions/Speed.cs"
 "Assets/Scripts/Scriptable Objects/EnemyData.cs"
 "Assets/Scripts/Scriptable Objects/WeaponData.cs"
