@@ -8,11 +8,10 @@ public class Speed : MonoBehaviour
     public double spawnRate;
     public double timeToSpawn;
     public GameObject rectangle;
+    public attackPlayer attackPlayer;
     public double newHealth;
     public Wakizashi_Counter counter;
     public double cooldown;
-
-    public PlayerAttributes player;
     // Attack speed increase is hard coded onto the unique weapon
     // Start is called before the first frame update
     void Start()
@@ -21,10 +20,12 @@ public class Speed : MonoBehaviour
         rectangle = new GameObject();
         rectangle.AddComponent(typeof(EnemyData));
     }
-    public void enterDimension(PlayerAttributes player)
+    public PlayerAttributes enterDimension(PlayerAttributes player)
     {
-        this.player = player;
-        this.player.dimensionChangeSpeed(newHealth);
+        player.dimensionChangeSpeed(newHealth);
+        attackPlayer.fillInData(Rectangle, player);
+        rectangle.AddComponent(typeof(attackPlayer));
+        return player;
     }
     // Update is called once per frame
     void Update()
@@ -55,26 +56,21 @@ public class Speed : MonoBehaviour
     {
         Instantiate(rectangle);
     }
-    public void isAttacked(double damage)
+    public bool getCounter()
     {
         if (counter.counter())
         {
             //say successful counter
+            return true;
         }
         else
         {
-            player.changeHealth(damage);
-            if (player.getAlive() == false)
-            {
-                exitDimension();
-                //end the game
-            }
+            return false;
         }
     }
 
-    public PlayerAttributes exitDimension()
+    public void exitDimension()
     {
         //end the instance of Wakizashi Counter
-        return player;
     }
 }

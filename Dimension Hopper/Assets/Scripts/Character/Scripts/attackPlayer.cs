@@ -11,28 +11,19 @@ public class attackPlayer : MonoBehaviour
     public double attackWindup;
 
     public double timeToAttack;
+    public PlayerAttributes player;
 
-    public int currentDimension;
-
-    public Durability durabilityDimension;
-
-    public Speed speedDimension;
-
-    public TimeDimension timeDimension;
     // Start is called before the first frame update
     void Start()
     {
         EnemyHitbox = GetComponent<Collider>();
         
     }
-
-    void fillInData(EnemyData enemy, Durability durability, Speed speed, TimeDimension time)
+    public void fillInData(EnemyData enemy, PlayerAttributes player)
     {
-        this.damage = enemy.damage;
-        this.attackWindup = enemy.attackWindup;
-        durabilityDimension = durability;
-        speedDimension = speed;
-        timeDimension = time;
+        damage = enemy.damage;
+        attackWindup = enemy.attackWindup;
+        this.player = player;
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -57,21 +48,6 @@ public class attackPlayer : MonoBehaviour
 
     void triggerAttack()
     {
-        switch (currentDimension)
-        {
-            case 1:
-                durabilityDimension.isAttacked(damage);
-                break;
-            case 2:
-                speedDimension.isAttacked(damage);
-                break;
-            case 3:
-                timeDimension.isAttacked(damage);
-                break;
-        }
-    }
-    void newDimension(int dimensionNum)
-    {
-        currentDimension = dimensionNum;
+        player.changeHealth(damage);
     }
 }
