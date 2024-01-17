@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyNavigation : MonoBehaviour
 {
     public Transform player;  // Drag and drop the player GameObject onto this field in the Inspector
-    public float moveSpeed = 5f;  // Adjust the movement speed as needed
+
+    private NavMeshAgent navMeshAgent;
+
+    void Start()
+    {
+        // Get the NavMeshAgent component attached to the enemy GameObject
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent component not found on the enemy GameObject.");
+        }
+    }
 
     void Update()
     {
-        if (player != null)
+        if (player != null && navMeshAgent != null)
         {
-            // Get the direction from the enemy to the player
-            Vector3 direction = player.position - transform.position;
-
-            // Normalize the direction to get a unit vector
-            direction.Normalize();
-
-            // Calculate the movement amount based on the direction and speed
-            Vector3 movement = direction * moveSpeed * Time.deltaTime;
-
-            // Move the enemy towards the player
-            transform.Translate(movement);
+            // Set the destination for the NavMeshAgent to move towards the player
+            navMeshAgent.SetDestination(player.position);
         }
         else
         {
-            Debug.LogWarning("Player reference is missing. Please assign the player GameObject in the Inspector.");
+            Debug.LogWarning("Player reference or NavMeshAgent is missing. Please assign the player GameObject and ensure a NavMeshAgent is attached to the enemy GameObject in the Inspector.");
         }
     }
 }
