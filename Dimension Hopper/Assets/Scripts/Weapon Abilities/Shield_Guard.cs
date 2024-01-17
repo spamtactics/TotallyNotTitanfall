@@ -9,26 +9,30 @@ public class Shield_Guard : MonoBehaviour
     public double currentAbilityDuration;
     public double baseAbilityDuration;
     public bool abilityUsed;
+    public bool abilityInUse;
     // Start is called before the first frame update
     void Start()
     {
         currentCooldown = 0.0;
         abilityUsed = false;
+        abilityInUse = false;
     }
     // Update is called once per frame
     void Update()
     {
-        if (abilityUsed)
-        {
-            currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
-            if (currentAbilityDuration <= 0)
+        if (abilityInUse){
+            if (abilityUsed)
             {
-                AbilityEnd();
+                currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
+                if (currentAbilityDuration <= 0)
+                {
+                    AbilityEnd();
+                }
             }
-        }
-        else
-        {
-            currentCooldown = currentCooldown - Time.deltaTime;
+            else
+            {
+                currentCooldown = currentCooldown - Time.deltaTime;
+            }
         }
     }
     public bool TriggerAbility()
@@ -58,5 +62,14 @@ public class Shield_Guard : MonoBehaviour
     public double getCooldown()
     {
         return currentCooldown;
+    }
+    public void ExitDimension()
+    {
+        abilityInUse = false;
+    }
+
+    public void EnterDimension()
+    {
+        abilityInUse = true;
     }
 }
