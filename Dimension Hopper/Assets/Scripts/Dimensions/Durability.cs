@@ -21,18 +21,19 @@ public class Durability : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        guardAbility = new Shield_Guard();
         spawnRate = Triangle.spawnRate;
         timeToSpawn = spawnRate;
         //creating the triangle enemy
         triangle = new GameObject();
         triangle.AddComponent(typeof(EnemyData));
+        guardAbility = new Shield_Guard();
     }
     public PlayerAttributes enterDimension(PlayerAttributes player)
     {
         player.dimensionChangeDurability(newHealth, newSpeed);
         attackPlayer.fillInData(Triangle, player);
         triangle.AddComponent(typeof(attackPlayer));
+        guardAbility.EnterDimension();
         return player;
     }
     // Update is called once per frame
@@ -83,6 +84,6 @@ public class Durability : MonoBehaviour
 
     public void exitDimension()
     {
-        // delete current instance of shield guard
+        guardAbility.ExitDimension();
     }
 }

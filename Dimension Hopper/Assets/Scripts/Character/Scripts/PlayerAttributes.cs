@@ -73,6 +73,19 @@ public class PlayerAttributes : MonoBehaviour
         switch (currentDimension)
         {
             case 1:
+                if (durabilityDimension.getImmune()==false)
+                {
+                    health = health - deltaHealth;
+                }
+                break;
+            case 2:
+                if (speedDimension.getCounter() == false)
+                {
+                    health = health - deltaHealth;
+                }
+                break;
+            default:
+                health = health - deltaHealth;
                 break;
         }
     }

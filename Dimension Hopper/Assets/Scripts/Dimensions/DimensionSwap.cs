@@ -62,7 +62,7 @@ public class DimensionSwap : MonoBehaviour
                 speedDimension.exitDimension();
                 break;
             case 3:
-                player=timeDimension.exitDimension();
+                timeDimension.exitDimension();
                 break;
             default:
                 break;

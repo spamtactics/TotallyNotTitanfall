@@ -11,6 +11,8 @@ public class Wakizashi_Counter : MonoBehaviour
     public bool successfulCounter;
     public bool abilityUsed;
     public double cooldownReduction;
+
+    public bool abilityInUse;
     //initialise a timer object
     
     // Start is called before the first frame update
@@ -18,24 +20,27 @@ public class Wakizashi_Counter : MonoBehaviour
     {
         currentCooldown = 0;
         abilityUsed = false;
+        abilityInUse = false;
     }
     // Update is called once per frame
     void Update()
     {
-        if (abilityUsed)
-        {
-            if(currentAbilityDuration<=0)
+        if (abilityInUse){
+            if (abilityUsed)
             {
-                abilityEnd();
+                if (currentAbilityDuration <= 0)
+                {
+                    abilityEnd();
+                }
+                else
+                {
+                    currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
+                }
             }
-            else
+            else if (currentCooldown > 0)
             {
-                currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
+                currentCooldown = currentCooldown - Time.deltaTime;
             }
-        }
-        else if(currentCooldown>0)
-        {
-            currentCooldown = currentCooldown - Time.deltaTime;
         }
     }
     public bool TriggerAbility()
@@ -79,5 +84,14 @@ public class Wakizashi_Counter : MonoBehaviour
     public double getCooldown()
     {
         return currentCooldown;
+    }
+    public void ExitDimension()
+    {
+        abilityInUse = false;
+    }
+
+    public void EnterDimension()
+    {
+        abilityInUse = true;
     }
 }

@@ -16,15 +16,16 @@ public class Speed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        counter = new Wakizashi_Counter();
         rectangle = new GameObject();
         rectangle.AddComponent(typeof(EnemyData));
+        counter = new Wakizashi_Counter();
     }
     public PlayerAttributes enterDimension(PlayerAttributes player)
     {
         player.dimensionChangeSpeed(newHealth);
         attackPlayer.fillInData(Rectangle, player);
         rectangle.AddComponent(typeof(attackPlayer));
+        counter.EnterDimension();
         return player;
     }
     // Update is called once per frame
@@ -71,6 +72,6 @@ public class Speed : MonoBehaviour
 
     public void exitDimension()
     {
-        //end the instance of Wakizashi Counter
+        counter.ExitDimension();
     }
 }

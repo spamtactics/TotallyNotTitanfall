@@ -17,17 +17,18 @@ public class TimeDimension : MonoBehaviour
     public bool abilityActive;
     void Start()
     {
-        AdrenalineAbility = new AdrenalineRush();
         spawnRate = Sphere.spawnRate;
         timeToSpawn = spawnRate;
         //creating the triangle enemy
         sphere = new GameObject();
         sphere.AddComponent(typeof(EnemyData));
+        AdrenalineAbility = new AdrenalineRush();
     }
     public void enterDimension(PlayerAttributes player)
     {
         attackPlayer.fillInData(Sphere, player);
         Time.timeScale = 0.5f;
+        AdrenalineAbility.EnterDimension();
     }
     // Update is called once per frame
     void Update()
@@ -71,13 +72,13 @@ public class TimeDimension : MonoBehaviour
     {
         Instantiate(sphere);
     }
-    public PlayerAttributes exitDimension()
+    public void exitDimension()
     {
         //end the instance of Adrenaline Rush
         if (abilityActive){
             player.endAdrenalineRush();
         }
-        return player;
+        AdrenalineAbility.ExitDimension();
     }
 }
 
