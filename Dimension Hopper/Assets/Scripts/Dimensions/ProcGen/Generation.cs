@@ -9,21 +9,18 @@ public class Generation : MonoBehaviour
     {
         
     }
-    public float[,] GenerateNoiseMap(int mapDepth, int mapWidth, float scale){
+    public float[,] GenerateNoiseMap(int mapDepth, int mapWidth, float scale, float offsetX, float offsetZ){
         float[,] noiseMap = new float[mapDepth, mapWidth];
-
-        for(int i = 0; i < mapDepth; i++){
-            for(int j = 0; j < mapWidth; j++){
-
-            float sampleX = j/scale;
-            float sampleY = i/scale;
-
-            float noise = Mathf.PerlinNoise(sampleX, sampleY);
-            noiseMap[i, j] = noise;
-
+        for (int zIndex = 0; zIndex < mapDepth; zIndex++) {
+            for (int xIndex = 0; xIndex < mapWidth; xIndex++) {
+                                        // calculate sample indices based on the coordinates, the scale and the offset
+                float sampleX = (xIndex + offsetX) / scale;
+                float sampleZ = (zIndex + offsetZ) / scale;
+                                        // generate noise value using PerlinNoise
+                float noise = Mathf.PerlinNoise (sampleX, sampleZ);
+                noiseMap [zIndex, zIndex] = noise;
             }
         }
-
         return noiseMap;
     }
     // Update is called once per frame
