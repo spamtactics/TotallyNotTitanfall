@@ -26,6 +26,7 @@ public class Durability : MonoBehaviour
         //creating the triangle enemy
         triangle = new GameObject();
         triangle.AddComponent(typeof(EnemyData));
+        triangle.AddComponent(typeof(EnemyNavigation));
         guardAbility = new Shield_Guard();
     }
     public PlayerAttributes enterDimension(PlayerAttributes player)
