@@ -2,8 +2,17 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/Library/*
-/[Tt]emp/
+/Library/APIUpdater/*
+/Library/Artifacts/*
+/Library/Bee/*
+/Library/BurstCache/*
+/Library/com.unity.ide.rider/*
+/Library/ScriptAssemblies/*
+/Library/Search/*
+/Library/ShaderCache/*
+/Library/StateCache/*
+/Library/TempArtifacts/*
+/Temp/*
 /obj/*
 /[Bb]uild/
 /[Bb]uilds/
@@ -75,3 +84,4 @@ crashlytics-build.properties
 *.png
 *.dll
 *.mvfrm
+/Library/ArtifactDB
