@@ -25,6 +25,11 @@ public class PlayerAttributes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (getAlive() == false)
+        {
+            //end the game
+            Application.Quit();
+        }
         if (Input.GetKey(KeyCode.J))
         {
             targetDimension = 1;
@@ -40,7 +45,6 @@ public class PlayerAttributes : MonoBehaviour
             targetDimension = 3;
             //time
         }
-
         if (targetDimension == currentDimension)
         {
             //raise some sort of error
@@ -49,6 +53,7 @@ public class PlayerAttributes : MonoBehaviour
         {
             if (swapper.TriggerSwap(targetDimension))
             {
+                currentDimension = targetDimension;
                 //say successful
             }
             else
@@ -70,23 +75,27 @@ public class PlayerAttributes : MonoBehaviour
 
     public void changeHealth(double deltaHealth)
     {
-        switch (currentDimension)
-        {
-            case 1:
-                if (durabilityDimension.getImmune()==false)
-                {
+        if (swapper.isSwapping==false){
+            switch (currentDimension)
+            {
+                case 1:
+                    if (durabilityDimension.getImmune() == false)
+                    {
+                        health = health - deltaHealth;
+                    }
+
+                    break;
+                case 2:
+                    if (speedDimension.getCounter() == false)
+                    {
+                        health = health - deltaHealth;
+                    }
+
+                    break;
+                default:
                     health = health - deltaHealth;
-                }
-                break;
-            case 2:
-                if (speedDimension.getCounter() == false)
-                {
-                    health = health - deltaHealth;
-                }
-                break;
-            default:
-                health = health - deltaHealth;
-                break;
+                    break;
+            }
         }
     }
 
@@ -100,7 +109,7 @@ public class PlayerAttributes : MonoBehaviour
         speed = speed / 2;
     }
 
-    public bool getAlive()
+    bool getAlive()
     {
         if (health < 0)
         {

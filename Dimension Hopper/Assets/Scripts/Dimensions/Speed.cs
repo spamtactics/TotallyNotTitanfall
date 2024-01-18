@@ -18,6 +18,7 @@ public class Speed : MonoBehaviour
     {
         rectangle = new GameObject();
         rectangle.AddComponent(typeof(EnemyData));
+        rectangle.AddComponent(typeof(EnemyNavigation));
         counter = new Wakizashi_Counter();
     }
     public PlayerAttributes enterDimension(PlayerAttributes player)

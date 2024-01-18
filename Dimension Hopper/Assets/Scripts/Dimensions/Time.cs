@@ -22,6 +22,7 @@ public class TimeDimension : MonoBehaviour
         //creating the triangle enemy
         sphere = new GameObject();
         sphere.AddComponent(typeof(EnemyData));
+        sphere.AddComponent(typeof(EnemyNavigation));
         AdrenalineAbility = new AdrenalineRush();
     }
     public void enterDimension(PlayerAttributes player)
