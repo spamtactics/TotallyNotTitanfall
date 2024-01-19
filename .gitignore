@@ -2,22 +2,22 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/Library/APIUpdater/*
-/Library/Artifacts/*
-/Library/Bee/*
-/Library/BurstCache/*
-/Library/com.unity.ide.rider/*
-/Library/ScriptAssemblies/*
-/Library/Search/*
-/Library/ShaderCache/*
-/Library/StateCache/*
-/Library/TempArtifacts/*
-/Temp/*
-/obj/*
-/[Bb]uild/
-/[Bb]uilds/
-/Logs/*
-/[Uu]ser[Ss]ettings/
+\Library\APIUpdater\*
+\Library\Artifacts\*
+\Library\Bee\*
+\Library\BurstCache\*
+\Library\com.unity.ide.rider\*
+\Library\ScriptAssemblies\*
+\Library\Search\*
+\Library\ShaderCache\*
+\Library\StateCache\*
+\Library\TempArtifacts\*
+\Temp\*
+\obj\*
+\[Bb]uild\
+\[Bb]uilds\
+\Logs\*
+\[Uu]ser[Ss]ettings\
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -84,4 +84,4 @@ crashlytics-build.properties
 *.png
 *.dll
 *.mvfrm
-/Library/ArtifactDB
+\Library\ArtifactDB
