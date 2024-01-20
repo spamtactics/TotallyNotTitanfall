@@ -12,23 +12,22 @@ public class attackPlayer : MonoBehaviour
 
     public double timeToAttack;
     public PlayerAttributes player;
-
     // Start is called before the first frame update
     void Start()
     {
         EnemyHitbox = GetComponent<Collider>();
         
     }
-    public void fillInData(EnemyData enemy, PlayerAttributes player)
+    public void fillInData(EnemyData enemy)
     {
         damage = enemy.damage;
         attackWindup = enemy.attackWindup;
-        this.player = player;
     }
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name == "Player")
+        if (other.gameObject.name == "Player")
         {
+            player = other.gameObject.GetComponent<PlayerAttributes>();
             timeToAttack = attackWindup;
         }
     }

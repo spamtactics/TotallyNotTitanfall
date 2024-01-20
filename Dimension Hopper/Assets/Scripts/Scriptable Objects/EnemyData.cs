@@ -11,4 +11,5 @@ public class EnemyData : ScriptableObject {
     public double hpRefund;
     public double attackWindup;
     public double attackRange;
+    public double health;
 }

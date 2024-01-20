@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7beae25a3ea83ef4d890a5f4ac677c86, type: 3}
+  m_Script: {fileID: 0}
   m_Name: TimeEnemy
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Sphere
   damage: 10
   speed: 3
-  spawnRate: 4
+  spawnRate: 3
   hpRefund: 2
   attackWindup: 0.5
   attackRange: 10
+  health: 30

@@ -75,7 +75,7 @@ public class PlayerAttributes : MonoBehaviour
 
     public void changeHealth(double deltaHealth)
     {
-        if (swapper.isSwapping==false){
+        if (swapper.checkSwapping()==false){
             switch (currentDimension)
             {
                 case 1:
