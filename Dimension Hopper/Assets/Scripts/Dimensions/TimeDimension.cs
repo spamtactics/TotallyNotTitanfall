@@ -39,7 +39,7 @@ public class TimeDimension : MonoBehaviour
         stab = hitbox.GetComponent<attackEnemy>();
         stab.updateDamage(Sword.damage);
     }
-    public void enterDimension(PlayerAttributes player)
+    public void enterDimension(Player player)
     {
         inDimension = true;
         attackPlayer.fillInData(Sphere);

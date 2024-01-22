@@ -15,13 +15,13 @@ public class DimensionSwap : MonoBehaviour
 
     public TimeDimension timeDimension;
 
-    public PlayerAttributes player;
+    public Player player;
 
     public int currentDimension;
     // Start is called before the first frame update
     void Start()
     {
-        // should you automatically start in a dimension?
+        currentDimension = 0;
     }
 
     public void feedDimensions(Durability durability, Speed speed, TimeDimension time)
@@ -31,7 +31,7 @@ public class DimensionSwap : MonoBehaviour
         timeDimension = time;
     }
     // Update is called once per frame
-    public void getPlayer(PlayerAttributes player)
+    public void getPlayer(Player player)
     {
         this.player = player;
     }

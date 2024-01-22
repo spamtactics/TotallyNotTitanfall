@@ -10,7 +10,7 @@ public class Speed : MonoBehaviour
     public double timeToSpawn;
     public GameObject rectangle;
     public attackPlayer attackPlayer;
-    public double newHealth;
+    public double newHealth=10.0;
     public Wakizashi_Counter counter;
     public double cooldown;
 
@@ -42,7 +42,7 @@ public class Speed : MonoBehaviour
         slash = hitbox.GetComponent<attackEnemy>();
         slash.updateDamage(Wakizashi.damage);
     }
-    public PlayerAttributes enterDimension(PlayerAttributes player)
+    public Player enterDimension(Player player)
     {
         player.dimensionChangeSpeed(newHealth);
         counter.EnterDimension();

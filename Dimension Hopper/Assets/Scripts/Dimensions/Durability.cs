@@ -13,8 +13,8 @@ public class Durability : MonoBehaviour
     public GameObject triangle;
     public attackPlayer attackPlayer;
     //player attributes
-    public double newHealth;
-    public double newSpeed;
+    public double newHealth=10.0;
+    public double newSpeed=0.75;
     public Shield_Guard guardAbility;
     public bool immune;
     
@@ -47,7 +47,7 @@ public class Durability : MonoBehaviour
         bash=Hitbox.GetComponent<attackEnemy>();
         bash.updateDamage(Shield.damage);
     }
-    public PlayerAttributes enterDimension(PlayerAttributes player)
+    public Player enterDimension(Player player)
     {
         player.dimensionChangeDurability(newHealth, newSpeed);
         guardAbility.EnterDimension();

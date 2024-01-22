@@ -11,7 +11,7 @@ public class attackPlayer : MonoBehaviour
     public double attackWindup;
 
     public double timeToAttack;
-    public PlayerAttributes player;
+    public Player player;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class attackPlayer : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            player = other.gameObject.GetComponent<PlayerAttributes>();
+            player = other.gameObject.GetComponent<Player>();
             timeToAttack = attackWindup;
         }
     }
