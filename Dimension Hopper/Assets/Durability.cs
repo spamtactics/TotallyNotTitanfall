@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Durability : MonoBehaviour
 {
+    public GameObject playerObject;
+    public Player player;
     public bool inDimension;
 	// getting the enemy data
-    [SerializeField] public EnemyData Triangle;
     public double spawnRate;
     public double timeToSpawn;
+    public double enemyDamage;
+    public double attackWindup;
     public GameObject triangle;
     public attackPlayer attackPlayer;
     //player attributes
@@ -20,40 +23,38 @@ public class Durability : MonoBehaviour
     
     public double cooldown;
     //weapon attributes
-    [SerializeField] public WeaponData Shield;
     public double attackFrequency;
     public double attackCooldown;
+    public double damage;
     public GameObject Hitbox;
     public attackEnemy bash;
     // Start is called before the first frame update
     void Start()
     {
-        spawnRate = Triangle.spawnRate;
+        //getting the player
+        playerObject = GameObject.Find("Player");
+        player = playerObject.GetComponent<Player>();
+        //setting up the enemy
         timeToSpawn = spawnRate;
         triangle = new GameObject();
         //assigning the triangle data to it
-        triangle.AddComponent(typeof(EnemyData));
-        EnemyData data=triangle.GetComponent<EnemyData>();
-        data = Triangle;
         triangle.AddComponent(typeof(EnemyNavigation));
         //assigning the attackPlayer script to it
         triangle.AddComponent(typeof(attackPlayer));
         attackPlayer=triangle.GetComponent<attackPlayer>();
-        attackPlayer.fillInData(Triangle);
-        guardAbility = new Shield_Guard();
+        attackPlayer.fillInData(enemyDamage, attackWindup);
+        guardAbility = playerObject.GetComponent<Shield_Guard>();
         //getting weapon attributes
-        attackFrequency = Shield.attackFrequency;
         Hitbox.AddComponent(typeof(attackEnemy));
         bash=Hitbox.GetComponent<attackEnemy>();
-        bash.updateDamage(Shield.damage);
+        bash.updateDamage(damage);
     }
-    public Player enterDimension(Player player)
+    public void enterDimension()
     {
         player.dimensionChangeDurability(newHealth, newSpeed);
         guardAbility.EnterDimension();
         attackCooldown = 0;
         inDimension = true;
-        return player;
     }
     // Update is called once per frame
     void Update()

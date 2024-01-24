@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject player;
     public double health;
     public double speed;
     public int currentDimension;
     public int targetDimension;
     public Durability durabilityDimension;
     public Speed speedDimension;
-    public TimeDimension timeDimension;
-    public DimensionSwap swapper;
+    public Time_Dimension timeDimension;
+    public DimensionSwapper swapper;
     void Start()
     {
-        swapper = new DimensionSwap();
-        swapper.getPlayer(this);
-        durabilityDimension = new Durability();
-        speedDimension = new Speed();
-        timeDimension = new TimeDimension();
-        swapper.feedDimensions(durabilityDimension,speedDimension,timeDimension);
+        //remember to name the player gameObject player
+        player = GameObject.Find("Player");
+        swapper = player.GetComponent<DimensionSwapper>();
+        durabilityDimension = player.GetComponent<Durability>();
+        speedDimension = player.GetComponent<Speed>();
+        timeDimension = player.GetComponent<Time_Dimension>();
     }
 
     // Update is called once per frame

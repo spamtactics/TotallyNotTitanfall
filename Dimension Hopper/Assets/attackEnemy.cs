@@ -8,8 +8,12 @@ public class attackEnemy : MonoBehaviour
     private double damage;
     private EnemyData targetData;
     public double enemyHealth;
-    public double attackDuration;
+    public double attackDuration=0.1;
     // Start is called before the first frame update
+    public void Start()
+    {
+        // useless
+    }
 
     public void updateDamage(double damage)
     {
@@ -30,7 +34,6 @@ public class attackEnemy : MonoBehaviour
             targetData.health = enemyHealth;
         }
     }
-
     private void Update()
     {
         attackDuration = attackDuration - Time.deltaTime;

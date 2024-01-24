@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Speed : MonoBehaviour
 {
+    public GameObject playerObject;
+    public Player player;
     public bool inDimension;
-    [SerializeField] public EnemyData Rectangle;
+    //enemy data
     public double spawnRate;
     public double timeToSpawn;
+    public double enemyDamage;
+    public double attackWindup;
     public GameObject rectangle;
     public attackPlayer attackPlayer;
     public double newHealth=10.0;
     public Wakizashi_Counter counter;
     public double cooldown;
 
-    [SerializeField] public WeaponData Wakizashi;
-
     public double attackFrequency;
 
     public double attackCooldown;
+    public double damage;
 
     public GameObject hitbox;
 
@@ -27,28 +30,28 @@ public class Speed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //getting the player
+        playerObject = GameObject.Find("Player");
+        player = playerObject.GetComponent<Player>();
+        //setting up the enemy gameobject
         rectangle = new GameObject();
-        //adding the Enemydata
-        rectangle.AddComponent(typeof(EnemyData));
-        EnemyData data =rectangle.GetComponent<EnemyData>();
-        data = Rectangle;
+        //adding the Enemy data
         rectangle.AddComponent(typeof(EnemyNavigation));
         //adding the attackPlayer script
         rectangle.AddComponent(typeof(attackPlayer));
         attackPlayer=rectangle.GetComponent<attackPlayer>();
-        attackPlayer.fillInData(Rectangle);
-        counter = new Wakizashi_Counter();
+        attackPlayer.fillInData(enemyDamage, attackWindup);
+        counter = playerObject.GetComponent<Wakizashi_Counter>();
         hitbox.AddComponent(typeof(attackEnemy));
         slash = hitbox.GetComponent<attackEnemy>();
-        slash.updateDamage(Wakizashi.damage);
+        slash.updateDamage(damage);
     }
-    public Player enterDimension(Player player)
+    public void enterDimension()
     {
         player.dimensionChangeSpeed(newHealth);
         counter.EnterDimension();
         attackCooldown = 0;
         inDimension = true;
-        return player;
     }
     // Update is called once per frame
     void Update()

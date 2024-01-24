@@ -15,13 +15,12 @@ public class attackPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyHitbox = GetComponent<Collider>();
-        
+        // not sure what to do here
     }
-    public void fillInData(EnemyData enemy)
+    public void fillInData(double damage, double attackWindup)
     {
-        damage = enemy.damage;
-        attackWindup = enemy.attackWindup;
+        this.damage=damage;
+        this.attackWindup=attackWindup;
     }
     void OnTriggerEnter(Collider other)
     {

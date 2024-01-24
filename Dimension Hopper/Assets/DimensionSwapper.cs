@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DimensionSwap : MonoBehaviour
+public class DimensionSwapper : MonoBehaviour
 {
+    public GameObject playerObject;
     public double baseCooldown;
     public double currentCooldown;
     public double baseSwapDuration;
@@ -13,8 +14,7 @@ public class DimensionSwap : MonoBehaviour
 
     public Speed speedDimension;
 
-    public TimeDimension timeDimension;
-
+    public Time_Dimension timeDimension;
     public Player player;
 
     public int currentDimension;
@@ -22,19 +22,15 @@ public class DimensionSwap : MonoBehaviour
     void Start()
     {
         currentDimension = 0;
+        playerObject = GameObject.Find("Player");
+        player=playerObject.GetComponent<Player>();
+        durabilityDimension=playerObject.GetComponent<Durability>();
+        speedDimension=playerObject.GetComponent<Speed>();
+        timeDimension=playerObject.GetComponent<Time_Dimension>();
     }
 
-    public void feedDimensions(Durability durability, Speed speed, TimeDimension time)
-    {
-        durabilityDimension = durability;
-        speedDimension = speed;
-        timeDimension = time;
-    }
     // Update is called once per frame
-    public void getPlayer(Player player)
-    {
-        this.player = player;
-    }
+
     void Update()
     {
         if (isSwapping)
@@ -70,13 +66,13 @@ public class DimensionSwap : MonoBehaviour
         switch (dimensionNum)
         {
             case 1:
-                durabilityDimension.enterDimension(player);
+                durabilityDimension.enterDimension();
                 break;
             case 2:
-                speedDimension.enterDimension(player);
+                speedDimension.enterDimension();
                 break;
             case 3:
-                timeDimension.enterDimension(player);
+                timeDimension.enterDimension();
                 break;
             default:
                 break;
@@ -113,3 +109,4 @@ public class DimensionSwap : MonoBehaviour
         return isSwapping;
     }
 }
+
