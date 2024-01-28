@@ -26,7 +26,7 @@ public class Durability : MonoBehaviour
     public double attackFrequency;
     public double attackCooldown;
     public double damage;
-    public GameObject Hitbox;
+    public GameObject attackBox;
     public attackEnemy bash;
     // Start is called before the first frame update
     void Start()
@@ -38,19 +38,21 @@ public class Durability : MonoBehaviour
         timeToSpawn = spawnRate;
         triangle = new GameObject();
         //assigning the triangle data to it
-        triangle.AddComponent(typeof(EnemyNavigation));
+        //triangle.AddComponent(typeof(EnemyNavigation));
         //assigning the attackPlayer script to it
         triangle.AddComponent(typeof(attackPlayer));
         attackPlayer=triangle.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         guardAbility = playerObject.GetComponent<Shield_Guard>();
         //getting weapon attributes
-        Hitbox.AddComponent(typeof(attackEnemy));
-        bash=Hitbox.GetComponent<attackEnemy>();
+        attackBox = new GameObject();
+        attackBox.AddComponent(typeof(attackEnemy));
+        bash=attackBox.GetComponent<attackEnemy>();
         bash.updateDamage(damage);
     }
     public void enterDimension()
     {
+        Debug.Log("In Durability");
         player.dimensionChangeDurability(newHealth, newSpeed);
         guardAbility.EnterDimension();
         attackCooldown = 0;
@@ -115,7 +117,7 @@ public class Durability : MonoBehaviour
 
     void Bash()
     {
-        Instantiate(Hitbox);
+        Instantiate(attackBox);
     }
     void spawnNew()
     {

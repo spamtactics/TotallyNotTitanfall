@@ -23,7 +23,7 @@ public class Speed : MonoBehaviour
     public double attackCooldown;
     public double damage;
 
-    public GameObject hitbox;
+    public GameObject attackBox;
 
     public attackEnemy slash;
     // Attack speed increase is hard coded onto the unique weapon
@@ -36,18 +36,21 @@ public class Speed : MonoBehaviour
         //setting up the enemy gameobject
         rectangle = new GameObject();
         //adding the Enemy data
-        rectangle.AddComponent(typeof(EnemyNavigation));
-        //adding the attackPlayer script
+        
+        //rectangle.AddComponent(typeof(EnemyNavigation));
+        
         rectangle.AddComponent(typeof(attackPlayer));
         attackPlayer=rectangle.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         counter = playerObject.GetComponent<Wakizashi_Counter>();
-        hitbox.AddComponent(typeof(attackEnemy));
-        slash = hitbox.GetComponent<attackEnemy>();
+        attackBox = new GameObject();
+        attackBox.AddComponent(typeof(attackEnemy));
+        slash = attackBox.GetComponent<attackEnemy>();
         slash.updateDamage(damage);
     }
     public void enterDimension()
     {
+        Debug.Log("In Speed");
         player.dimensionChangeSpeed(newHealth);
         counter.EnterDimension();
         attackCooldown = 0;
@@ -97,7 +100,7 @@ public class Speed : MonoBehaviour
     }
     void Slash()
     {
-        Instantiate(hitbox);
+        Instantiate(attackBox);
     }
     void spawnNew()
     {

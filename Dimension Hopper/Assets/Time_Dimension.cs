@@ -31,17 +31,19 @@ public class Time_Dimension : MonoBehaviour
         //setting up the enemy
         timeToSpawn = spawnRate;
         sphere = new GameObject();
-        sphere.AddComponent(typeof(EnemyNavigation));
+        //sphere.AddComponent(typeof(EnemyNavigation));
         sphere.AddComponent(typeof(attackPlayer));
         attackPlayer = sphere.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         AdrenalineAbility = playerObject.GetComponent<AdrenalineRush>();
+        attackBox = new GameObject();
         attackBox.AddComponent(typeof(attackEnemy));
         stab = attackBox.GetComponent<attackEnemy>();
         stab.updateDamage(damage);
     }
     public void enterDimension()
     {
+        Debug.Log("In Time");
         inDimension = true;
         Time.timeScale = 0.5f;
         AdrenalineAbility.EnterDimension();
