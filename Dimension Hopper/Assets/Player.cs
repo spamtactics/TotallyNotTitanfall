@@ -2,18 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
     public GameObject player;
-    public double health;
-    public double speed;
+    public double health=100;
     public int currentDimension;
     public int targetDimension;
     public Durability durabilityDimension;
     public Speed speedDimension;
     public Time_Dimension timeDimension;
     public DimensionSwapper swapper;
+    public NavMeshAgent playerSpeed;
     void Start()
     {
         //remember to name the player gameObject player
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
         durabilityDimension = player.GetComponent<Durability>();
         speedDimension = player.GetComponent<Speed>();
         timeDimension = player.GetComponent<Time_Dimension>();
+        playerSpeed = player.GetComponent<NavMeshAgent>();
+        playerSpeed.speed = 4;
     }
 
     // Update is called once per frame
@@ -35,7 +38,6 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.J))
         {
             targetDimension = 1;
-            Debug.Log("Registered player input");
             //durability
         }
         else if (Input.GetKey(KeyCode.K))
@@ -70,9 +72,9 @@ public class Player : MonoBehaviour
     {
         this.health -= health;
     }
-    public void dimensionChangeDurability(double health, double speed)
+    public void dimensionChangeDurability(double health, float speed)
     {
-        this.speed = speed;
+        playerSpeed.speed = speed;
         this.health += health;
     }
 
@@ -104,12 +106,22 @@ public class Player : MonoBehaviour
 
     public void adrenalineRush()
     {
-        speed = speed * 2;
+        playerSpeed.speed = playerSpeed.speed * 2;
     }
 
     public void endAdrenalineRush()
     {
-        speed = speed / 2;
+        playerSpeed.speed = playerSpeed.speed / 2;
+    }
+
+    public void startGuard()
+    {
+        playerSpeed.speed = 0;
+    }
+
+    public void endGuard()
+    {
+        playerSpeed.speed = 1;
     }
 
     bool getAlive()

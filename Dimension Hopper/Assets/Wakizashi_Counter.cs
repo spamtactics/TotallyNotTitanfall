@@ -4,12 +4,12 @@ using UnityEngine;
 public class Wakizashi_Counter : MonoBehaviour
 {
     public double currentCooldown;
-    public double baseCooldown;
+    public double baseCooldown=5f;
     public double currentAbilityDuration;
-    public double baseAbilityDuration;
+    public double baseAbilityDuration=0.2f;
     public bool successfulCounter;
     public bool abilityUsed;
-    public double cooldownReduction;
+    public double cooldownReduction=3f;
 
     public bool abilityInUse;
     //initialise a timer object
@@ -17,7 +17,7 @@ public class Wakizashi_Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentCooldown = 0;
+        currentCooldown = 0f;
         abilityUsed = false;
         abilityInUse = false;
     }
@@ -27,7 +27,7 @@ public class Wakizashi_Counter : MonoBehaviour
         if (abilityInUse){
             if (abilityUsed)
             {
-                if (currentAbilityDuration <= 0)
+                if (currentAbilityDuration <= 0f)
                 {
                     abilityEnd();
                 }
@@ -36,7 +36,7 @@ public class Wakizashi_Counter : MonoBehaviour
                     currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
                 }
             }
-            else if (currentCooldown > 0)
+            else if (currentCooldown > 0f)
             {
                 currentCooldown = currentCooldown - Time.deltaTime;
             }
@@ -44,7 +44,7 @@ public class Wakizashi_Counter : MonoBehaviour
     }
     public bool TriggerAbility()
     {
-        if (currentCooldown <= 0)
+        if (currentCooldown <= 0f)
         {
             currentAbilityDuration = baseAbilityDuration;
             successfulCounter = false;

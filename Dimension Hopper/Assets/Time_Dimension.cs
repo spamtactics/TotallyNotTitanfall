@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Time_Dimension : MonoBehaviour
 {
     public GameObject playerObject;
     public bool inDimension;
     // getting the enemy data
-    public double spawnRate;
+    public double spawnRate=5f;
     public double timeToSpawn;
-    public double enemyDamage;
-    public double attackWindup;
+    public double enemyDamage=10;
+    public double attackWindup=0.5f;
     public GameObject sphere;
     public attackPlayer attackPlayer;
+    public NavMeshAgent enemySpeed;
+    
     public double cooldown;
     // Start is called before the first frame update
     public AdrenalineRush AdrenalineAbility;
     public Player player;
     public bool abilityActive;
-    public double attackFrequency;
+    public double attackFrequency=1f;
     public double attackCooldown;
-    public double damage;
+    public double damage=10;
     public GameObject attackBox;
     public attackEnemy stab;
     void Start()
@@ -31,23 +34,24 @@ public class Time_Dimension : MonoBehaviour
         //setting up the enemy
         timeToSpawn = spawnRate;
         sphere = new GameObject();
-        //sphere.AddComponent(typeof(EnemyNavigation));
-        sphere.AddComponent(typeof(attackPlayer));
+        sphere.AddComponent(typeof(EnemyNavigation));
+        enemySpeed = sphere.GetComponent<NavMeshAgent>();
+        enemySpeed.speed = 8;
+        sphere.AddComponent<attackPlayer>();
         attackPlayer = sphere.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         AdrenalineAbility = playerObject.GetComponent<AdrenalineRush>();
         attackBox = new GameObject();
-        attackBox.AddComponent(typeof(attackEnemy));
+        attackBox.AddComponent<attackEnemy>();
         stab = attackBox.GetComponent<attackEnemy>();
         stab.updateDamage(damage);
     }
     public void enterDimension()
     {
-        Debug.Log("In Time");
         inDimension = true;
         Time.timeScale = 0.5f;
         AdrenalineAbility.EnterDimension();
-        attackCooldown = 0;
+        attackCooldown = 0f;
     }
     // Update is called once per frame
     void Update()
@@ -77,20 +81,20 @@ public class Time_Dimension : MonoBehaviour
                     //print ability ended
                 }
             }
-            if (attackCooldown > 0.0)
+            if (attackCooldown > 0.0f)
             {
                 attackCooldown -= Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                if (attackCooldown < 0.0)
+                if (attackCooldown < 0.0f)
                 {
                     Stab();
                     attackCooldown = attackFrequency;
                 }
             }
-            if (timeToSpawn > 0.0)
+            if (timeToSpawn > 0.0f)
             {
                 timeToSpawn -= Time.deltaTime;
             }
@@ -111,7 +115,7 @@ public class Time_Dimension : MonoBehaviour
     }
     public void exitDimension()
     {
-        //end the instance of Adrenaline Rush
+        Time.timeScale = 1f;
         if (abilityActive){
             player.endAdrenalineRush();
         }

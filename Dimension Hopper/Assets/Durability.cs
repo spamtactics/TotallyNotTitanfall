@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class Durability : MonoBehaviour
@@ -9,23 +10,24 @@ public class Durability : MonoBehaviour
     public Player player;
     public bool inDimension;
 	// getting the enemy data
-    public double spawnRate;
+    public double spawnRate=5f;
     public double timeToSpawn;
-    public double enemyDamage;
-    public double attackWindup;
+    public double enemyDamage = 50;
+    public double attackWindup=0.75f;
     public GameObject triangle;
     public attackPlayer attackPlayer;
+    public NavMeshAgent enemySpeed;
     //player attributes
     public double newHealth=10.0;
-    public double newSpeed=0.75;
+    public float newSpeed=3;
     public Shield_Guard guardAbility;
     public bool immune;
     
     public double cooldown;
     //weapon attributes
-    public double attackFrequency;
+    public double attackFrequency=1f;
     public double attackCooldown;
-    public double damage;
+    public double damage=10;
     public GameObject attackBox;
     public attackEnemy bash;
     // Start is called before the first frame update
@@ -38,41 +40,44 @@ public class Durability : MonoBehaviour
         timeToSpawn = spawnRate;
         triangle = new GameObject();
         //assigning the triangle data to it
-        //triangle.AddComponent(typeof(EnemyNavigation));
+        triangle.AddComponent<EnemyNavigation>();
+        triangle.AddComponent<NavMeshAgent>();
+        enemySpeed = triangle.GetComponent<NavMeshAgent>();
+        enemySpeed.speed = 4;
         //assigning the attackPlayer script to it
-        triangle.AddComponent(typeof(attackPlayer));
+        triangle.AddComponent<attackPlayer>();
         attackPlayer=triangle.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         guardAbility = playerObject.GetComponent<Shield_Guard>();
         //getting weapon attributes
         attackBox = new GameObject();
-        attackBox.AddComponent(typeof(attackEnemy));
+        attackBox.AddComponent<attackEnemy>();
         bash=attackBox.GetComponent<attackEnemy>();
         bash.updateDamage(damage);
     }
     public void enterDimension()
     {
-        Debug.Log("In Durability");
         player.dimensionChangeDurability(newHealth, newSpeed);
         guardAbility.EnterDimension();
-        attackCooldown = 0;
+        attackCooldown = 0f;
         inDimension = true;
     }
     // Update is called once per frame
     void Update()
         {
             if(inDimension){
-                if (attackCooldown > 0.0)
+                if (attackCooldown > 0.0f)
                 {
                     attackCooldown -= Time.deltaTime;
                 }
 
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    if (attackCooldown <= 0)
+                    if (attackCooldown <= 0f)
                     {
                         Bash();
                         attackCooldown = attackFrequency;
+                        Debug.Log("Attack");
                     }
                 }
 
@@ -81,6 +86,7 @@ public class Durability : MonoBehaviour
                     if (guardAbility.TriggerAbility())
                     {
                         immune = true;
+                        player.startGuard();
                         //print successful ability
                     }
                     else
@@ -94,19 +100,20 @@ public class Durability : MonoBehaviour
                 {
                     if (guardAbility.checkImmunity() == false)
                     {
+                        player.endGuard();
                         immune = false;
                         //print ability ended
                     }
                 }
 
-                if (timeToSpawn > 0.0)
+                if (timeToSpawn > 0.0f)
                 {
                     timeToSpawn -= Time.deltaTime;
                 }
                 else
                 {
-                    spawnNew();
                     timeToSpawn = spawnRate;
+                    spawnNew();
                 }
             }
     }
@@ -126,6 +133,8 @@ public class Durability : MonoBehaviour
 
     public void exitDimension()
     {
+        //resetting player attributes
+        player.dimensionChangeDurability(-10,4);
         inDimension = false;
         guardAbility.ExitDimension();
     }

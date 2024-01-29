@@ -5,9 +5,9 @@ using UnityEngine;
 public class DimensionSwapper : MonoBehaviour
 {
     public GameObject playerObject;
-    public double baseCooldown=10.0;
+    public double baseCooldown=10.0f;
     public double currentCooldown;
-    public double baseSwapDuration=0.5;
+    public double baseSwapDuration=0.5f;
     public double currentSwapDuration;
     public bool isSwapping;
     public Durability durabilityDimension;
@@ -36,9 +36,8 @@ public class DimensionSwapper : MonoBehaviour
         if (isSwapping)
         {
             currentSwapDuration = currentSwapDuration - Time.deltaTime;
-            if (currentSwapDuration <= 0)
+            if (currentSwapDuration <= 0.0f)
             {
-                Debug.Log("Swap cooldown reset");
                 isSwapping = false;
                 currentCooldown = baseCooldown;
             }
@@ -84,7 +83,7 @@ public class DimensionSwapper : MonoBehaviour
 
     public bool TriggerSwap(int targetDimension)
     {
-        if (currentCooldown<=0)
+        if (currentCooldown<=0f)
         {
             isSwapping = true;
             currentSwapDuration = baseSwapDuration;

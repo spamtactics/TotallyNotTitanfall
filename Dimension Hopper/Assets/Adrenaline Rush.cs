@@ -5,15 +5,15 @@ using UnityEngine;
 public class AdrenalineRush : MonoBehaviour
 {
     public double currentCooldown;
-    public double baseCooldown;
+    public double baseCooldown=5f;
     public double currentAbilityDuration;
-    public double baseAbilityDuration;
+    public double baseAbilityDuration=1f;
     public bool abilityUsed;
     public bool abilityInUse;
     // Start is called before the first frame update
     void Start()
     {
-        currentCooldown = 0.0;
+        currentCooldown = 0.0f;
         abilityInUse = false;
         abilityUsed = false;
     }
@@ -24,7 +24,7 @@ public class AdrenalineRush : MonoBehaviour
             if (abilityUsed)
             {
                 currentAbilityDuration = currentAbilityDuration - Time.deltaTime;
-                if (currentAbilityDuration <= 0)
+                if (currentAbilityDuration <= 0f)
                 {
                     AbilityEnd();
                 }
@@ -37,7 +37,7 @@ public class AdrenalineRush : MonoBehaviour
     }
     public bool TriggerAbility()
     {
-        if (currentCooldown<=0)
+        if (currentCooldown<=0f)
         {
             abilityUsed = true;
             currentAbilityDuration = baseAbilityDuration;

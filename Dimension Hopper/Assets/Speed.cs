@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Speed : MonoBehaviour
 {
@@ -8,20 +9,22 @@ public class Speed : MonoBehaviour
     public Player player;
     public bool inDimension;
     //enemy data
-    public double spawnRate;
+    public double spawnRate=5f;
     public double timeToSpawn;
-    public double enemyDamage;
-    public double attackWindup;
+    public double enemyDamage=20;
+    public double attackWindup=0.5f;
     public GameObject rectangle;
     public attackPlayer attackPlayer;
+    public NavMeshAgent enemySpeed;
+    
     public double newHealth=10.0;
     public Wakizashi_Counter counter;
     public double cooldown;
 
-    public double attackFrequency;
+    public double attackFrequency=0.5f;
 
     public double attackCooldown;
-    public double damage;
+    public double damage=10;
 
     public GameObject attackBox;
 
@@ -36,24 +39,24 @@ public class Speed : MonoBehaviour
         //setting up the enemy gameobject
         rectangle = new GameObject();
         //adding the Enemy data
-        
-        //rectangle.AddComponent(typeof(EnemyNavigation));
-        
-        rectangle.AddComponent(typeof(attackPlayer));
+        rectangle.AddComponent(typeof(EnemyNavigation));
+        rectangle.AddComponent<NavMeshAgent>();
+        enemySpeed = rectangle.GetComponent<NavMeshAgent>();
+        enemySpeed.speed = 6;
+        rectangle.AddComponent<attackPlayer>();
         attackPlayer=rectangle.GetComponent<attackPlayer>();
         attackPlayer.fillInData(enemyDamage, attackWindup);
         counter = playerObject.GetComponent<Wakizashi_Counter>();
         attackBox = new GameObject();
-        attackBox.AddComponent(typeof(attackEnemy));
+        attackBox.AddComponent<attackEnemy>();
         slash = attackBox.GetComponent<attackEnemy>();
         slash.updateDamage(damage);
     }
     public void enterDimension()
     {
-        Debug.Log("In Speed");
         player.dimensionChangeSpeed(newHealth);
         counter.EnterDimension();
-        attackCooldown = 0;
+        attackCooldown = 0f;
         inDimension = true;
     }
     // Update is called once per frame
@@ -73,21 +76,21 @@ public class Speed : MonoBehaviour
                 }
             }
 
-            if (attackCooldown > 0.0)
+            if (attackCooldown > 0.0f)
             {
                 attackCooldown -= Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                if (attackCooldown < 0.0)
+                if (attackCooldown < 0.0f)
                 {
                     Slash();
                     attackCooldown = attackFrequency;
                 }
             }
 
-            if (timeToSpawn > 0.0)
+            if (timeToSpawn > 0.0f)
             {
                 timeToSpawn -= Time.deltaTime;
             }
@@ -121,6 +124,8 @@ public class Speed : MonoBehaviour
 
     public void exitDimension()
     {
+        //resetting player health
+        player.dimensionChangeSpeed(-10);
         inDimension = false;
         counter.ExitDimension();
     }
